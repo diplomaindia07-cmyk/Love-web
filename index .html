@@ -1,0 +1,930 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday SABANA My Wife</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:sans-serif
+}
+
+body{
+  background:#4b2a7b;
+  transition:1s;
+  overflow-x:hidden
+}
+
+body.pink{
+  background:#ffdee9;
+  background-image:linear-gradient(#ffdee9,#ffc9d6,#ffb5e6)
+}
+
+.screen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:10;
+  transition:.8s;
+  overflow-y:auto
+}
+
+.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:scale(1.1)!important;
+  position:fixed!important
+}
+
+.btn{
+  padding:14px 35px;
+  border:none;
+  border-radius:30px;
+  font-size:1.2rem;
+  cursor:pointer;
+  margin:10px
+}
+
+#yesBtn{
+  background:#ff4d8d;
+  color:white
+}
+
+#noBtn{
+  background:white;
+  color:#4b2a7b
+}
+
+#wish{
+  position:fixed;
+  top:13%;
+  width:100%;
+  text-align:center;
+  font-size:2.3rem;
+  color:#ff2e7e;
+  font-weight:bold;
+  z-index:6;
+  display:none;
+  padding:10px
+}
+
+#treeCanvas{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:4
+}
+
+.balloon{
+  position:fixed;
+  bottom:-120px;
+  width:48px;
+  height:65px;
+  border-radius:50%;
+  z-index:5;
+  animation:fly linear forwards;
+  box-shadow:
+    inset -8px -10px 15px rgba(0,0,0,.15),
+    inset 8px 8px 12px rgba(255,255,255,.45)
+}
+
+.balloon:after{
+  content:"";
+  position:absolute;
+  width:2px;
+  height:45px;
+  background:#777;
+  top:63px;
+  left:50%
+}
+
+@keyframes fly{
+  to{
+    transform:translateY(-120vh) rotate(12deg);
+    opacity:.9
+  }
+}
+
+#dateMessage{
+  background:rgba(255,255,255,.94);
+  padding:30px 22px;
+  border-radius:25px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 10px 35px rgba(255,46,126,.3)
+}
+
+#dateMessage h1{
+  color:#ff2e7e;
+  font-size:2.4rem;
+  margin-bottom:15px
+}
+
+#dateMessage p{
+  color:#8a3155;
+  font-size:1.15rem;
+  line-height:1.7
+}
+
+.heart{
+  font-size:2rem;
+  margin:12px
+}
+
+/* BOOK */
+#s2{
+  background:linear-gradient(135deg,#ffd6e5,#fff0f6,#ffc4dc)
+}
+
+.book-wrapper{
+  width:92%;
+  max-width:390px;
+  perspective:1800px
+}
+
+.book{
+  position:relative;
+  width:100%;
+  height:500px;
+  margin:auto;
+  transform-style:preserve-3d
+}
+
+.book-back{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,#7d214d,#d63384);
+  border-radius:8px 18px 18px 8px;
+  box-shadow:
+    0 20px 40px rgba(90,0,40,.35),
+    inset 8px 0 12px rgba(255,255,255,.15)
+}
+
+.page{
+  position:absolute;
+  inset:0;
+  background:#fffafc;
+  border-radius:5px 15px 15px 5px;
+  transform-origin:left center;
+  transform-style:preserve-3d;
+  transition:transform 1.2s cubic-bezier(.65,.05,.36,1);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.25),
+    inset 8px 0 15px rgba(120,0,50,.08);
+  overflow:hidden
+}
+
+.page.flipped{
+  transform:rotateY(-180deg)
+}
+
+.page img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block
+}
+
+.page::after{
+  content:"";
+  position:absolute;
+  inset:12px;
+  border:2px solid rgba(255,46,126,.25);
+  border-radius:4px 12px 12px 4px;
+  pointer-events:none
+}
+
+.photo-caption{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:18px 10px;
+  text-align:center;
+  color:#ff2e7e;
+  background:linear-gradient(
+    transparent,
+    rgba(255,255,255,.95)
+  );
+  font-size:18px;
+  font-weight:bold
+}
+
+.page-number{
+  position:absolute;
+  bottom:8px;
+  right:15px;
+  color:#999;
+  font-size:12px;
+  z-index:5
+}
+
+/* LOVE MESSAGES */
+#s3{
+  justify-content:flex-start;
+  padding-top:50px;
+  padding-bottom:50px;
+  position:absolute;
+  min-height:100vh;
+  overflow-y:auto;
+  background:linear-gradient(
+    135deg,
+    #ffd6e5,
+    #fff0f6,
+    #ffc4dc
+  )
+}
+
+.div{
+  font-size:2rem;
+  margin:15px 0;
+  text-align:center
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  max-width:400px;
+  width:85%;
+  margin:15px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(255,77,141,.3);
+  animation:cardIn 1s ease
+}
+
+.card h3{
+  color:#ff2e7e;
+  margin-bottom:12px
+}
+
+.card p{
+  color:#7b3150;
+  line-height:1.7;
+  font-size:16px
+}
+
+@keyframes cardIn{
+  from{
+    opacity:0;
+    transform:translateY(40px)
+  }
+  to{
+    opacity:1;
+    transform:translateY(0)
+  }
+}
+
+.love-title{
+  color:#ff2e7e;
+  font-size:2rem;
+  text-align:center;
+  margin-bottom:10px
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST SCREEN -->
+<div id="s1" class="screen">
+
+  <h1 style="
+    color:white;
+    font-size:2.3rem;
+    margin-bottom:30px;
+    text-align:center
+  ">
+    Today Is Your Birthday? 🎂
+  </h1>
+
+  <div>
+    <button class="btn" id="yesBtn">Yes 💖</button>
+    <button class="btn" id="noBtn">No</button>
+  </div>
+
+</div>
+
+
+<!-- BIRTHDAY WISH -->
+<h1 id="wish">
+  Happy Birthday To You SABANA My Wife! 🎉💖
+</h1>
+
+<canvas id="treeCanvas" width="400" height="520"></canvas>
+
+
+<!-- DATE SCREEN -->
+<div id="dateScreen" class="screen hidden">
+
+  <div id="dateMessage">
+
+    <div class="heart">❤️ 🎈 ❤️</div>
+
+    <h1>11 September 💖</h1>
+
+    <p>
+      <b>11 September</b> सिर्फ एक तारीख नहीं है...
+      <br><br>
+
+      ये दिन <b>हमारे लिए खास है</b> ❤️
+      <br><br>
+
+      क्योंकि ये हमारे
+      <b>इंतज़ार के Birthday Day</b>
+      का दिन है। 🎂💕
+      <br><br>
+
+      इस खास दिन पर मेरी बस यही दुआ है कि
+      तुम्हारी जिंदगी हमेशा खुशियों,
+      प्यार और मुस्कान से भरी रहे। 🌸
+      <br><br>
+
+      <b>Happy Birthday My Love SABANA ❤️</b>
+      <br>
+
+      You are very special to me. 💖
+    </p>
+
+    <div class="heart">💗 💕 💗</div>
+
+  </div>
+
+</div>
+
+
+<!-- PHOTO BOOK -->
+<div id="s2" class="screen hidden">
+
+  <div class="book-wrapper">
+
+    <div class="book">
+
+      <div class="book-back"></div>
+
+      <div class="page" id="page4">
+        <img src="photo4.jpg" alt="Sabana Photo 4">
+        <div class="photo-caption">
+          ❤️ My Beautiful Sabana ❤️
+        </div>
+        <div class="page-number">4 / 4</div>
+      </div>
+
+      <div class="page" id="page3">
+        <img src="photo3.jpg" alt="Sabana Photo 3">
+        <div class="photo-caption">
+          💕 My Love 💕
+        </div>
+        <div class="page-number">3 / 4</div>
+      </div>
+
+      <div class="page" id="page2">
+        <img src="photo2.jpg" alt="Sabana Photo 2">
+        <div class="photo-caption">
+          🌸 Keep Smiling Always 🌸
+        </div>
+        <div class="page-number">2 / 4</div>
+      </div>
+
+      <div class="page" id="page1">
+        <img src="photo1.jpg" alt="Sabana Photo 1">
+        <div class="photo-caption">
+          💖 My Love Sabana 💖
+        </div>
+        <div class="page-number">1 / 4</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- LOVE MESSAGES -->
+<div id="s3" class="screen hidden">
+
+  <div class="love-title">
+    ❤️ For My Beautiful Wife ❤️
+  </div>
+
+  <div class="div">❤️</div>
+
+  <div class="card">
+
+    <h3>My Love Message 1 💌</h3>
+
+    <p>
+      <b>Happy Birthday My Wife Sabana!</b>
+      <br><br>
+
+      Tum meri zindagi ki sabse
+      khoobsurat wajah ho.
+      <br><br>
+
+      I love you so much meri jaan. ❤️
+    </p>
+
+  </div>
+
+  <div class="div">❤️ ❤️</div>
+
+  <div class="card">
+
+    <h3>My Love Message 2 🌸</h3>
+
+    <p>
+      Sabana, tum jab se meri life me aayi ho,
+      har din Eid jaisa lagta hai.
+      <br><br>
+
+      Allah tumhe hamesha khush rakhe.
+      💖
+    </p>
+
+  </div>
+
+  <div class="div">❤️ ❤️ ❤️</div>
+
+  <div class="card">
+
+    <h3>My Love Message 3 ✨</h3>
+
+    <p>
+      Meri pyaari biwi,
+      Allah se ek hi dua -
+      tum hamesha mere saath raho.
+      <br><br>
+
+      <b>
+        Happy Birthday My Queen Sabana! 🎂💖
+      </b>
+    </p>
+
+  </div>
+
+  <div class="div">
+    💖 I Love You Forever 💖
+  </div>
+
+</div>
+
+
+<script>
+
+const s1 =
+  document.getElementById("s1");
+
+const yesBtn =
+  document.getElementById("yesBtn");
+
+const noBtn =
+  document.getElementById("noBtn");
+
+const wish =
+  document.getElementById("wish");
+
+const canvas =
+  document.getElementById("treeCanvas");
+
+const ctx =
+  canvas.getContext("2d");
+
+const dateScreen =
+  document.getElementById("dateScreen");
+
+const s2 =
+  document.getElementById("s2");
+
+const s3 =
+  document.getElementById("s3");
+
+
+/* NO BUTTON */
+
+noBtn.onclick = () => {
+
+  noBtn.style.transform =
+    `translate(
+      ${Math.random()*220-110}px,
+      ${Math.random()*180-90}px
+    )`;
+
+};
+
+
+/* YES BUTTON */
+
+yesBtn.onclick = () => {
+
+  s1.classList.add("hidden");
+
+  wish.style.display = "block";
+
+  setTimeout(drawTree,700);
+
+};
+
+
+/* TREE */
+
+function drawTree(){
+
+  let growth = 0;
+
+  const treeGrow =
+    setInterval(() => {
+
+      ctx.clearRect(
+        0,0,400,520
+      );
+
+      ctx.fillStyle="#704214";
+
+      ctx.beginPath();
+
+      ctx.roundRect(
+        183,350,34,170,12
+      );
+
+      ctx.fill();
+
+
+      ctx.strokeStyle="#704214";
+
+      ctx.lineWidth=12;
+
+      ctx.lineCap="round";
+
+      ctx.beginPath();
+
+      ctx.moveTo(200,390);
+      ctx.lineTo(155,300);
+
+      ctx.moveTo(200,390);
+      ctx.lineTo(245,300);
+
+      ctx.moveTo(190,350);
+      ctx.lineTo(135,270);
+
+      ctx.moveTo(210,350);
+      ctx.lineTo(265,270);
+
+      ctx.stroke();
+
+
+      ctx.fillStyle="#287a45";
+
+      ctx.beginPath();
+
+      ctx.arc(
+        200,
+        250,
+        Math.min(growth,105),
+        0,
+        Math.PI*2
+      );
+
+      ctx.fill();
+
+
+      ctx.fillStyle="#3ca35c";
+
+      ctx.beginPath();
+
+      ctx.arc(
+        145,
+        285,
+        Math.min(growth*.65,70),
+        0,
+        Math.PI*2
+      );
+
+      ctx.fill();
+
+
+      ctx.beginPath();
+
+      ctx.arc(
+        255,
+        285,
+        Math.min(growth*.65,70),
+        0,
+        Math.PI*2
+      );
+
+      ctx.fill();
+
+
+      growth += 3;
+
+
+      if(growth >= 105){
+
+        clearInterval(treeGrow);
+
+        setTimeout(
+          growBalloons,
+          700
+        );
+
+      }
+
+    },35);
+
+}
+
+
+/* BALLOONS ON TREE */
+
+function growBalloons(){
+
+  const positions = [
+
+    [150,250],
+    [190,210],
+    [225,245],
+    [130,300],
+    [170,285],
+    [210,280],
+    [255,295],
+    [200,320],
+    [155,330],
+    [240,325],
+    [200,255],
+    [270,270]
+
+  ];
+
+  let i=0;
+
+  const addBalloon =
+    setInterval(() => {
+
+      drawBalloonOnTree(
+        ...positions[i],
+        i
+      );
+
+      i++;
+
+      if(i>=positions.length){
+
+        clearInterval(addBalloon);
+
+        setTimeout(
+          flyTreeBalloons,
+          1200
+        );
+
+      }
+
+    },180);
+
+}
+
+
+/* DRAW BALLOON */
+
+function drawBalloonOnTree(
+  x,
+  y,
+  index
+){
+
+  const colors=[
+    "#ff4d8d",
+    "#ff1744",
+    "#ff8fab",
+    "#ffd166",
+    "#9b5de5",
+    "#00bbf9"
+  ];
+
+  ctx.fillStyle =
+    colors[index%colors.length];
+
+  ctx.beginPath();
+
+  ctx.ellipse(
+    x,y,15,20,
+    0,0,Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  ctx.fillStyle =
+    "rgba(255,255,255,.65)";
+
+  ctx.beginPath();
+
+  ctx.ellipse(
+    x-5,y-7,4,7,
+    0,0,Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  ctx.strokeStyle="#777";
+
+  ctx.lineWidth=1;
+
+  ctx.beginPath();
+
+  ctx.moveTo(x,y+20);
+
+  ctx.lineTo(x,y+42);
+
+  ctx.stroke();
+
+}
+
+
+/* FLYING BALLOONS */
+
+function flyTreeBalloons(){
+
+  ctx.clearRect(
+    0,0,400,520
+  );
+
+  ctx.fillStyle="#704214";
+
+  ctx.fillRect(
+    183,350,34,170
+  );
+
+
+  let count=0;
+
+  const flyInterval =
+    setInterval(() => {
+
+      createFlyingBalloon();
+
+      count++;
+
+      if(count>=35){
+
+        clearInterval(flyInterval);
+
+        setTimeout(() => {
+
+          canvas.style.display="none";
+
+          wish.style.display="none";
+
+          document.body.classList.add("pink");
+
+          dateScreen.classList.remove("hidden");
+
+          /*
+            Date screen automatically
+            stays for 4 seconds
+          */
+
+          setTimeout(
+            openPhotoBook,
+            4000
+          );
+
+        },2500);
+
+      }
+
+    },130);
+
+}
+
+
+/* CREATE FLYING BALLOON */
+
+function createFlyingBalloon(){
+
+  const b =
+    document.createElement("div");
+
+  b.className="balloon";
+
+  const colors=[
+    "#ff4d8d",
+    "#ff1744",
+    "#ff8fab",
+    "#ffd166",
+    "#9b5de5",
+    "#00bbf9"
+  ];
+
+  b.style.background =
+    colors[
+      Math.floor(
+        Math.random()*colors.length
+      )
+    ];
+
+  b.style.left =
+    (15+Math.random()*70)+"vw";
+
+  b.style.animationDuration =
+    (5+Math.random()*4)+"s";
+
+  b.style.transform =
+    `scale(
+      ${.75+Math.random()*.5}
+    )`;
+
+  document.body.appendChild(b);
+
+  setTimeout(
+    () => b.remove(),
+    9000
+  );
+
+}
+
+
+/* OPEN PHOTO BOOK AUTOMATICALLY */
+
+function openPhotoBook(){
+
+  dateScreen.classList.add("hidden");
+
+  s2.classList.remove("hidden");
+
+  startAutoBook();
+
+}
+
+
+/* PHOTO BOOK */
+
+const pages=[
+
+  document.getElementById("page1"),
+  document.getElementById("page2"),
+  document.getElementById("page3"),
+  document.getElementById("page4")
+
+];
+
+let currentPage=0;
+
+
+/*
+  हर 2 सेकंड में एक page
+  book की तरह पलटेगा
+*/
+
+function startAutoBook(){
+
+  const bookTimer =
+    setInterval(() => {
+
+      if(currentPage < pages.length){
+
+        pages[currentPage]
+          .classList.add("flipped");
+
+        currentPage++;
+
+      }
+
+      /*
+        Photo 4 पलटने के बाद
+        Love Messages दिखेंगे
+      */
+
+      if(currentPage === pages.length){
+
+        clearInterval(bookTimer);
+
+        setTimeout(() => {
+
+          s2.classList.add("hidden");
+
+          s3.classList.remove("hidden");
+
+        },2500);
+
+      }
+
+    },2000);
+
+}
+
+</script>
+
+</body>
+</html>
